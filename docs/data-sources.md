@@ -23,6 +23,12 @@ What each data source needs. Full instructions: [Phennec usage guide](https://ph
 2. Create a **Personal access token (classic)** with the `repo` scope and copy it.
 3. In Phennec, add a data source of type **GitHub** and enter the repository URL and the token.
 
+To limit access to one repository, use a **fine-grained personal access token** instead:
+
+1. Set **Repository access** to **Only select repositories** and choose the repository.
+2. Grant only the required read-only permissions.
+3. If the repository belongs to an organization, organization approval or a token policy may be required.
+
 ## Amazon S3
 
 Use a dedicated IAM user with least privilege. The policy in
