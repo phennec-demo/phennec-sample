@@ -33,6 +33,14 @@ class CheckS3PolicyTest(unittest.TestCase):
         p = policy({"Effect": "Deny", "Action": "s3:*", "Resource": "*"})
         self.assertEqual(check(p, "b"), [])
 
+    def test_prefix_resource_is_ok_with_prefix(self):
+        p = policy({"Effect": "Allow", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::b/docs/*"})
+        self.assertEqual(check(p, "b", "docs/"), [])
+
+    def test_prefix_resource_is_reported_without_prefix(self):
+        p = policy({"Effect": "Allow", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::b/docs/*"})
+        self.assertEqual(len(check(p, "b")), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
